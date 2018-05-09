@@ -34,7 +34,7 @@ func NewBaseJsonBean(code int, message string, data interface{}) *BaseJsonBean {
 //文件过滤器
 func fileTer(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
-	//判断是否有
+	//判断是否有.
 	if strings.Contains(path, ".") {
 		request_type := path[strings.LastIndex(path, "."):]
 		switch request_type {
@@ -112,7 +112,7 @@ var indeTpl = `
 </head>
 <body>
 <h1>Go Server :)</h1>
-<h3>It Works</h3>
+<h3>It Works.</h3>
 </body>
 </html>
 `
