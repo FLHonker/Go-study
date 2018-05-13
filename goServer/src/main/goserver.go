@@ -119,7 +119,7 @@ var indeTpl = `
 
 func main() {
 	server := http.Server{
-		Addr:			":8001",
+		Addr:			":8811",
 		Handler: 		&myHandle{},
 		ReadTimeout:	5*time.Second,
 	}
@@ -128,7 +128,7 @@ func main() {
 	//配置路由,可以添加自己的方法去处理对应路由
 	mux["/"] = Index
 
-	log.Println("已为您启动了服务,可以打开浏览器访问127.0.0.1:8001,您将看到访问日志")
+	log.Println("已为您启动了服务,可以打开浏览器访问127.0.0.1:8811,您将看到访问日志")
 
 	err := server.ListenAndServe()
 	if err != nil {
