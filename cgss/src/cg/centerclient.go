@@ -45,7 +45,7 @@ func (client *CenterClient)ListPlayer(params string)(ps []*Player, err error) {
 }
 
 func (client *CenterClient)Broadcast(message string) error {
-	m := &Message{Content: message}
+	m := &Message{Content: message}  //构造Message结构体
 	b, err := json.Marshal(m)
 	if err != nil {
 		return err
