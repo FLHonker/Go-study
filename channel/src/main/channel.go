@@ -17,7 +17,7 @@ func main() {
     for _, ch := range(chs) {
         <-ch
     }
-
+	/* 随机0,1
     ch := make(chan int, 1)
     for {
         select {
@@ -27,4 +27,5 @@ func main() {
         i := <-ch
         fmt.Println("Value recv:", i)
     }
+    */
 }
