@@ -21,6 +21,8 @@ var globalSessions *session.Manager
 func init() {
 	cf := &session.ManagerConfig{}
 	globalSessions, _ = session.NewManager("memory", cf)
+	//管理session销毁, 启动
+	go globalSessions.GC()
 }
 
 /*
@@ -153,13 +155,13 @@ func upload(w http.ResponseWriter, r *http.Request) {
 // session test - count and show
 func count(w http.ResponseWriter, r *http.Request) {
 	sess, _ := globalSessions.SessionStart(w, r)
-	createtime:= sess.Get("createtime")
-	if createtime == nil {
-		sess.Set("createtime", time.Now().Unix())
-	} else if (createtime.(int64) + 360) < time.Now().Unix() {
-		globalSessions.SessionDestroy(w, r)
-		sess, _ = globalSessions.SessionStart(w, r)
-	}
+	//createtime:= sess.Get("createtime")
+	//if createtime == nil {
+	//	sess.Set("createtime", time.Now().Unix())
+	//} else if (createtime.(int64) + 360) < time.Now().Unix() {
+	//	globalSessions.SessionDestroy(w, r)
+	//	sess, _ = globalSessions.SessionStart(w, r)
+	//}
 	ct := sess.Get("countnum")
 	if ct == nil {
 		sess.Set("countnum", 1)
@@ -169,6 +171,7 @@ func count(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("../view/count.html")
 	w.Header().Set("Conten-Type", "text/html")
 	t.Execute(w, sess.Get("countnum"))
+	//fmt.Println("counter:", sess.Get("countnum"))
 }
 
 // 验证表单输入函数
@@ -282,6 +285,7 @@ func main() {
 	http.HandleFunc("/", sayhelloName)	//设置访问路由 /
 	http.HandleFunc("/login", login)		//设置访问路由login
 	http.HandleFunc("/upload", upload)	//上传文件
+	http.HandleFunc("/count", count)
 	fmt.Println("Server is running...")
 	fmt.Println("Please access \"http://localhost:8811/\".")
 	err := http.ListenAndServe(":8811", nil)	//设置监听端口
