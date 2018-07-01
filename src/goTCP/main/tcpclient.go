@@ -7,6 +7,13 @@ import (
 	"io/ioutil"
 )
 
+/*
+func DialTCP(net string, laddr, raddr *TCPAddr) (c *TCPConn, err os.Error)
+	net参数是	"tcp4"、"tcp6"、"tcp"中的任意一个,分别表示TCP(IPv4-only)、TCP(IPv6-only)或者
+	TCP(IPv4,IPv6的任意一个)
+	laddr表示本机地址,一般设置为nil
+	raddr表示远程的服务地址
+ */
 
 // 客户端client
 // test web: baidu.com -- 14.215.177.39:80
